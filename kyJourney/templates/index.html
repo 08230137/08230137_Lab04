@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Learning Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #e9e0e8ff;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #df66eaff 0%, #9b4ba2ff 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .journey-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #df66eaff;
+        }
+        .journey-item h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .meta-info strong {
+            color: #333;
+        }
+        .description {
+            color: #555;
+            line-height: 1.8;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .empty-state p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #666;
+            border-top: 1px solid #ddddddff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">MyLearningJourney</div>
+            <div class="nav-links">
+                <a href="{% url 'index' %}">Learning Journey</a>
+                <a href="{% url 'about_me' %}">About Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>My Learning Journey</h1>
+            <p>Tracking my progress and achievements in web development</p>
+        </div>
+
+        {% for item in journey_items %}
+        <div class="journey-item">
+            <h3>{{ item.title }}</h3>
+            <div class="meta-info">
+                <div><strong>Category:</strong> {{ item.category }}</div>
+                <div><strong>Date Learned:</strong> {{ item.date_learned }}</div>
+            </div>
+            <p class="description">{{ item.description }}</p>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <p>No learning journey items yet. Start adding your learning experiences!</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Admin Interface Screenshots Section -->
+<div class="screenshots-section" style="margin-top: 4rem; padding-top: 3rem; border-top: 2px solid #e0e0e0;">
+    <div class="header" style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="color: #333; font-size: 2rem; margin-bottom: 1rem;">Admin Interface Screenshots</h2>
+        <p style="color: #666; font-size: 1.1rem;">Managing the learning journey through Django Admin Panel</p>
+    </div>
+
+    {% if admin_screenshots %}
+    <div class="screenshots-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 2rem;">
+        {% for screenshot in admin_screenshots %}
+        <div class="screenshot-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s;">
+            <div class="screenshot-image" style="width: 100%; height: 250px; overflow: hidden; border-bottom: 1px solid #e0e0e0;">
+                <img src="{{ screenshot.image.url }}" 
+                     alt="{{ screenshot.title }}" 
+                     style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="screenshot-info" style="padding: 1.5rem;">
+                <h3 style="color: #333; margin-bottom: 0.5rem; font-size: 1.2rem;">{{ screenshot.title }}</h3>
+                {% if screenshot.description %}
+                <p style="color: #666; line-height: 1.5; font-size: 0.95rem;">{{ screenshot.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state" style="text-align: center; padding: 3rem; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <p style="color: #666; font-size: 1.1rem;">No admin screenshots available yet. Add them through the admin panel.</p>
+    </div>
+    {% endif %}
+</div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 My Learning Journey. All rights reserved.</p>
+    </div>
+</body>
+</html>

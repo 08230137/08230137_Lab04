@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - My Learning Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #e9e0e8ff;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #d066eaff 0%, #a24ba2ff 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #d066eaff 0%, #a24ba2ff 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .profile-header .student-id {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .profile-content {
+            padding: 3rem;
+        }
+        .info-section {
+            margin-bottom: 2.5rem;
+        }
+        .info-section h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #a24ba2ff;
+            padding-bottom: 0.5rem;
+        }
+        .info-section p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        .about-me-content {
+            background: #f9f9f9ff;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #a24ba2ff;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .empty-state p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #666666ff;
+            border-top: 1px solid #cea7ceff;
+        }
+        .highlight {
+            background: linear-gradient(120deg, #e7a8edff 0%, #fed6feff 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .default-profile {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e666eaff 0%, #9f4ba2ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        .key-details {
+            background: linear-gradient(135deg, #bb7fbbff 0%, #cd94d6ff 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .detail-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        .detail-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .detail-item p {
+            color: #666;
+            margin: 0;
+            font-size: 1rem;
+        }
+        .personal-info {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8e8f8ff;
+            border-radius: 10px;
+            border-left: 4px solid #e94ff7ff;
+        }
+        .info-item {
+            margin-bottom: 1rem;
+        }
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        .info-item strong {
+            color: #333333ff;
+            display: inline-block;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">MyLearningJourney</div>
+            <div class="nav-links">
+                <a href="{% url 'index' %}">Learning Journey</a>
+                <a href="{% url 'about_me' %}">About Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        {% if about_info %}
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-image">
+                    {% if about_info.profile_picture %}
+                        <img src="{{ about_info.profile_picture.url }}" alt="{{ about_info.name }}">
+                    {% else %}
+                        <div class="default-profile">
+                            👤
+                        </div>
+                    {% endif %}
+                </div>
+                <h1>{{ about_info.name }}</h1>
+            </div>
+            
+            <div class="profile-content">
+                <!-- Personal Information Section -->
+                <div class="personal-info">
+                    <div class="info-item">
+                        <strong>Student ID:</strong> {{ about_info.student_id }}
+                    </div>
+                    <div class="info-item">
+                        <strong>Education:</strong> Bachelor's in ICT, Samtse College of Education
+                    </div>
+                    <div class="info-item">
+                        <strong>Interests:</strong> Dancing, Nature Photography, Reading, Technology
+                    </div>
+                </div>
+
+                <!-- About Me Content -->
+                <div class="info-section">
+                    <h2>About Me</h2>
+                    <div class="about-me-content">
+                        <p>
+                            My name is Karma Yangchen. I am a third-year student at Samtse College of Education, pursuing a bachelor's degree in information and communication technology (ICT). 
+                            
+                            I am passionate about exploring how technology can be used to make learning more engaging and effective. I enjoy working on creative projects that help me develop both my technical and problem-solving skills. Apart from my academic pursuits, I have a deep interest in dancing, nature photography, and reading books. Dancing allows me to express myself creatively, photography helps me capture and appreciate the beauty of nature, and reading broadens my knowledge and imagination.
+                            
+                            My learning goals include mastering Django web development, building responsive web applications, and understanding MVT architecture thoroughly. I aim to create efficient, scalable web solutions while continuously learning new technologies in the web development ecosystem.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>Profile information not available. Please add your information in the admin panel.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 My Learning Journey. All rights reserved.</p>
+    </div>
+</body>
+</html>
